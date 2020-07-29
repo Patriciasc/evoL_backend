@@ -1,0 +1,29 @@
+{
+  "name": "evoL_backend",
+  "version": "1.0.0",
+  "description": "evoLution with Love",
+  "main": "index.js",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "mongoose": "^5.9.26",
+    "morgan": "^1.10.0",
+    "nodemon": "^2.0.4"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Patriciasc/evoL_backend.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Patriciasc/evoL_backend/issues"
+  },
+  "homepage": "https://github.com/Patriciasc/evoL_backend#readme"
+}
