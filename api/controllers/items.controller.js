@@ -3,15 +3,38 @@ const { handleError } = require("../utils");
 
 module.exports = {
   createItem,
+  getItems,
+  getMyItems,
+  getItemById,
 };
 
 function createItem(req, res) {
-  console.log("createItem");
-  console.log(req.body);
+  console.log("items.controller: " + req.body);
 
   req.body.owner = res.locals.user._id;
   itemModel
     .create(req.body)
     .then((response) => res.json(response))
+    .catch((err) => handleError(err, res));
+}
+
+function getItems(req, res) {
+  itemModel
+    .find()
+    .then((items) => res.json(items))
+    .catch((err) => handleError(err, res));
+}
+
+function getMyItems(req, res) {
+  itemModel
+    .find({ owner: res.locals.user._id })
+    .then((items) => res.json(items))
+    .catch((err) => handleError(err, res));
+}
+
+function getItemById(req, res) {
+  itemModel
+    .find({ _id: req.params.id })
+    .then((item) => res.json(item))
     .catch((err) => handleError(err, res));
 }
