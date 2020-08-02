@@ -9,8 +9,6 @@ module.exports = {
 };
 
 function createItem(req, res) {
-  console.log("items.controller: " + req.body);
-
   req.body.owner = res.locals.user._id;
   itemModel
     .create(req.body)
@@ -19,8 +17,14 @@ function createItem(req, res) {
 }
 
 function getItems(req, res) {
+  var query = {};
+
+  if (req.query.category) {
+    query.category = req.query.category;
+  }
+
   itemModel
-    .find()
+    .find(query)
     .then((items) => res.json(items))
     .catch((err) => handleError(err, res));
 }
