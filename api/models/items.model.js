@@ -1,8 +1,9 @@
 const mongoose = require("mongoose");
+const { text } = require("express");
 
 const itemSchema = new mongoose.Schema({
   owner: {
-    type: mongoose.Types.ObjectId,
+    type: mongoose.Schema.Types.ObjectId,
     ref: "user",
     required: [true, "User is required"],
   },

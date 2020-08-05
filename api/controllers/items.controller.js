@@ -25,6 +25,7 @@ function getItems(req, res) {
 
   itemModel
     .find(query)
+    .populate("owner")
     .then((items) => res.json(items))
     .catch((err) => handleError(err, res));
 }
@@ -39,6 +40,7 @@ function getMyItems(req, res) {
 function getItemById(req, res) {
   itemModel
     .find({ _id: req.params.id })
+    .populate("owner")
     .then((item) => res.json(item))
     .catch((err) => handleError(err, res));
 }

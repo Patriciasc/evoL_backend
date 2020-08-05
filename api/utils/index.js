@@ -3,12 +3,10 @@ const UserModel = require("../models/users.model");
 
 // Authenticate Middleware
 function authUser(req, res, next) {
-  console.log("authUser");
   if (!req.headers.token) {
     res.status(403).json({ error: "No Token found" });
   } else {
     try {
-      console.log("authUser: " + req.headers.token);
       const decodedToken = jwt.verify(req.headers.token, process.env.SECRET);
 
       UserModel.findOne({ email: decodedToken.email }).then((user) => {
