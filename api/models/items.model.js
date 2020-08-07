@@ -31,6 +31,11 @@ const itemSchema = new mongoose.Schema({
     type: Number,
     required: [true, "Price is required"],
   },
+  assignedTo: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "user",
+    default: null,
+  },
   createdAt: {
     type: Date,
     default: Date.now(),

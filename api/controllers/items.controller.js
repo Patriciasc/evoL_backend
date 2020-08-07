@@ -23,6 +23,8 @@ function getItems(req, res) {
     query.category = req.query.category;
   }
 
+  query.assignedTo = null;
+
   itemModel
     .find(query)
     .populate("owner")
