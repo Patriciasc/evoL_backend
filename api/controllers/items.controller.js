@@ -6,6 +6,7 @@ module.exports = {
   getItems,
   getMyItems,
   getItemById,
+  deleteItemById,
 };
 
 function createItem(req, res) {
@@ -44,5 +45,12 @@ function getItemById(req, res) {
     .find({ _id: req.params.id })
     .populate("owner")
     .then((item) => res.json(item))
+    .catch((err) => handleError(err, res));
+}
+
+function deleteItemById(req, res) {
+  itemModel
+    .deleteOne({ _id: req.params.id })
+    .then((response) => res.json(response))
     .catch((err) => handleError(err, res));
 }

@@ -9,6 +9,7 @@ module.exports = {
   getMyRequests,
   getRequestsByItemId,
   updateRequest,
+  deleteRequestById,
 };
 
 function addRequest(req, res) {
@@ -71,5 +72,12 @@ function updateRequest(req, res) {
         })
         .catch((err) => handleError(err, res));
     })
+    .catch((err) => handleError(err, res));
+}
+
+function deleteRequestById(req, res) {
+  requestModel
+    .deleteOne({ _id: req.params.id })
+    .then((response) => res.json(response))
     .catch((err) => handleError(err, res));
 }
