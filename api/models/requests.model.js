@@ -12,7 +12,7 @@ const requestSchema = new mongoose.Schema({
     ref: "item",
     required: [true, "Item is required"],
   },
-  description: {
+  comment: {
     type: String,
     required: [true, "Comment is required"],
   },

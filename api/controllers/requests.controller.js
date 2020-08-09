@@ -16,10 +16,22 @@ function addRequest(req, res) {
   req.body.userId = res.locals.user._id;
 
   requestModel
-    .create(req.body)
-    .then((response) => res.json(response))
+    .find({ userId: res.locals.user._id, itemId: req.body.itemId })
+    .then((request) => {
+      console.log("before:" + request);
+      if (!request) {
+        console.log("after: " + request);
+        console.log(req.body);
+        requestModel
+          .create(req.body)
+          .then((response) => res.json(response))
+          .catch((err) => handleError(err, res));
+      }
+    })
     .catch((err) => handleError(err, res));
 }
+
+function getRequestByItemAndUserId() {}
 
 function getMyRequests(req, res) {
   requestModel
