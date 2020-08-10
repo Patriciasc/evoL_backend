@@ -13,15 +13,13 @@ module.exports = {
 };
 
 function addRequest(req, res) {
+  console.log("addRequest");
   req.body.userId = res.locals.user._id;
 
   requestModel
     .find({ userId: res.locals.user._id, itemId: req.body.itemId })
     .then((request) => {
-      console.log("before:" + request);
-      if (!request) {
-        console.log("after: " + request);
-        console.log(req.body);
+      if (request.length === 0) {
         requestModel
           .create(req.body)
           .then((response) => res.json(response))
@@ -54,10 +52,6 @@ function getRequestsByItemId(req, res) {
 }
 
 function updateRequest(req, res) {
-  console.log("updateRequest");
-  console.log(req.params);
-  console.log(req.body);
-
   itemModel
     .findById({ _id: req.body.itemId })
     .then((item) => {
@@ -69,7 +63,6 @@ function updateRequest(req, res) {
             .find({ itemId: req.body.itemId })
             .then((requests) => {
               requests.forEach((request) => {
-                console.log(request);
                 request._id.toString() === req.params.id
                   ? (request.state = "Aceptado")
                   : (request.state = "Denegado");
