@@ -34,7 +34,12 @@ function getRequestByItemAndUserId() {}
 function getMyRequests(req, res) {
   requestModel
     .find({ userId: res.locals.user._id })
-    .populate("itemId userId")
+    .populate({
+      path: "itemId userId",
+      populate: {
+        path: "owner",
+      },
+    })
     .then((requests) => {
       res.json(requests);
     })
