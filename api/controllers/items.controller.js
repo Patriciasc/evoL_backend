@@ -28,6 +28,7 @@ function getItems(req, res) {
 
   itemModel
     .find(query)
+    .sort({ createdAt: -1 })
     .populate("owner")
     .then((items) => res.json(items))
     .catch((err) => handleError(err, res));
@@ -36,6 +37,7 @@ function getItems(req, res) {
 function getMyItems(req, res) {
   itemModel
     .find({ owner: res.locals.user._id })
+    .sort({ createdAt: -1 })
     .then((items) => res.json(items))
     .catch((err) => handleError(err, res));
 }
